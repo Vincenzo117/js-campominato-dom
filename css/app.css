@@ -76,6 +76,11 @@ main {
     box-shadow: inset 0 0 0 0 ;
 }
 
+.grid__cell.bomb {
+    background-color: #FF0000;
+    box-shadow: inset 0 0 0 0 ;
+}
+
 /* FOOTER */
 
 .footer-container {
