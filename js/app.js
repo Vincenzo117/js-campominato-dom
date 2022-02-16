@@ -87,8 +87,39 @@ function playGame(event) {
         endGame();
     } else {
         event.target.classList.add('safe');
+        const gridElementsArray = document.getElementsByClassName('grid__cell');
+
+        // Controllo quante bombe ci sono nelle 8 celle che circondano quella selezionata
+        // let currentIndex = parseInt(event.target.dataset.index);
+        // let j = 0;
+        // let bombCounter = 0;
+        // let index = 0;
+        // for (let i = 0; i < 8; i++ ){
+        //     if ( j < 3 && currentIndex > 6){
+        //         index = currentIndex + j - 8;
+        //         if (gridElementsArray[index].dataset.bomb === 'true'){
+        //             bombCounter++;
+        //         }
+        //         j++;
+        //     } else if (j < 5){
+        //         index = currentIndex + j - 2;
+        //         if (gridElementsArray[index].dataset.bomb === 'true'){
+        //             bombCounter++;
+        //         }
+        //         j += 2;
+        //     } else if ( j < 8) {
+        //         index = currentIndex + j;
+        //         if (gridElementsArray[index].dataset.bomb === 'true'){
+        //             bombCounter++;
+        //         }
+        //         j ++;
+        //     }
+        // }
+        // event.target.innerHTML = bombCounter;
+        // MI ARRENDO, così è troppo complesso
+
         // Controllo se sono stati scoperti tutti le safe cell
-        if (document.getElementsByClassName('safe').length === (document.getElementsByClassName('grid__cell').length - 16)) {
+        if (document.getElementsByClassName('safe').length === (gridElementsArray.length - 16)) {
             endGame('true');
         }
     }
@@ -98,6 +129,9 @@ function playGame(event) {
 function endGame(win) {
     // Tolgo il listener
     document.getElementById('grid').removeEventListener('click',playGame);
+    // Tolgo classe animazione
+    document.getElementById('grid').classList.remove('FadeInScale');
+    // Prendo array celle
     const gridElementsArray = document.getElementsByClassName('grid__cell');
     console.log(gridElementsArray);
     // Scopro le altre bombe
