@@ -40,6 +40,7 @@ function buildGrid(length, randArray) {
         // da uno a 16 dell'array assegno il dataset.bomb = 'true'
         if (randArray[i] <= 16){
             cellElement.dataset.bomb = 'true';
+            cellElement.innerHTML = '.';
         }
     }
     // Animazione di entrata
@@ -48,6 +49,7 @@ function buildGrid(length, randArray) {
     gridElement.addEventListener('click', playGame);
 }
 
+let dimension;
 
 // Funzione per iniziare la partita
 function startGame() {
@@ -55,7 +57,6 @@ function startGame() {
     const gameDifficultyIndex = document.getElementById('difficulty').selectedIndex;
     console.log(gameDifficultyIndex);
     // Creo variabile per la dimensione della grid
-    let dimension;
 
     switch (gameDifficultyIndex) {
         // easy
@@ -94,9 +95,10 @@ function playGame(event) {
         let j = 0;
         let bombCounter = 0;
         let index = 0;
-        for (let i = 0; i < 8; i++ ){
+
+        for (let i = 0; i < (dimension + 1); i++ ){
             if ( j < 3 && currentIndex > 6){
-                index = currentIndex + j - 8;
+                index = currentIndex + j - (dimension + 1);
                 console.log(gridElementsArray[index]);
                 if (gridElementsArray[index] !== undefined && gridElementsArray[index].dataset.bomb === 'true'){
                     bombCounter++;
@@ -117,7 +119,7 @@ function playGame(event) {
                 }
                 j ++; 
             } else if ( j < 8) {
-                index = currentIndex + j + 1;
+                index = currentIndex + j + (dimension - 6);
                 console.log(gridElementsArray[index]);
                 if (gridElementsArray[index] !== undefined && gridElementsArray[index].dataset.bomb === 'true'){
                     bombCounter++;
@@ -126,9 +128,8 @@ function playGame(event) {
             }
         }
         event.target.innerHTML = bombCounter;
-        // MI ARRENDO, così è troppo complesso
 
-        // Controllo se sono stati scoperti tutti le safe cell
+        // Controllo se sono stati scoperte tutte le safe cell
         if (document.getElementsByClassName('safe').length === (gridElementsArray.length - 16)) {
             endGame('true');
         }
