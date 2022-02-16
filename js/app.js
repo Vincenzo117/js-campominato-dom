@@ -87,11 +87,15 @@ function playGame(event) {
         endGame();
     } else {
         event.target.classList.add('safe');
+        // Controllo se sono stati scoperti tutti le safe cell
+        if (document.getElementsByClassName('safe').length === (document.getElementsByClassName('grid__cell').length - 16)) {
+            endGame('true');
+        }
     }
 
 }
 
-function endGame() {
+function endGame(win) {
     // Tolgo il listener
     document.getElementById('grid').removeEventListener('click',playGame);
     const gridElementsArray = document.getElementsByClassName('grid__cell');
@@ -101,6 +105,9 @@ function endGame() {
         if (gridElementsArray[i].dataset.bomb === 'true'){
             gridElementsArray[i].classList.add('bomb');
         }
+    }
+    if (win){
+        alert('Hai vinto!!!');
     }
 }
 
