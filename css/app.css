@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+
+
+
+/* HEADER */
+
+.header-container {
+    width: 80vw;
+    margin: 0 auto;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#difficulty {
+    width: 100px;
+}
+
+#play-btn {
+    width: 50px;
+}
+
+
+/* MAIN */
+
+main {
+    background-color: aquamarine;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+#grid {
+    width: 50%;
+    max-width: 480px;
+    min-width: 340px;
+    aspect-ratio: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.grid__cell {
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 200ms ease-in;
+    background-color: #C0C0C0;
+    box-shadow: inset 3px 3px white, inset -3px -3px #808080;
+    border: 1px solid gray;
+  
+}
+
+.grid__cell.safe {
+    background-color: lightskyblue;
+    color: white;
+    box-shadow: inset 0 0 0 0 ;
+}
+
+/* FOOTER */
+
+.footer-container {
+    width: 80vw;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+
+
+/* ANIMZAIONI */
+
+@keyframes FadeInScale {
+    0% {
+      opacity: 0;
+      transform: scale(.5);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+}
+
+.FadeInScale {
+    animation-duration: 500ms;
+    animation-name: FadeInScale;
+    animation-timing-function: cubic-bezier(.25, 0, .15, 1);
+}
