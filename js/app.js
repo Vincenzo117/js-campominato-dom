@@ -40,7 +40,7 @@ function buildGrid(length, randArray) {
         // da uno a 16 dell'array assegno il dataset.bomb = 'true'
         if (randArray[i] <= 16){
             cellElement.dataset.bomb = 'true';
-            cellElement.innerHTML = '.';
+            // cellElement.innerHTML = '.';
         }
     }
     // Animazione di entrata
