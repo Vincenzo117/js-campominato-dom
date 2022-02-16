@@ -89,33 +89,43 @@ function playGame(event) {
         event.target.classList.add('safe');
         const gridElementsArray = document.getElementsByClassName('grid__cell');
 
-        // Controllo quante bombe ci sono nelle 8 celle che circondano quella selezionata
-        // let currentIndex = parseInt(event.target.dataset.index);
-        // let j = 0;
-        // let bombCounter = 0;
-        // let index = 0;
-        // for (let i = 0; i < 8; i++ ){
-        //     if ( j < 3 && currentIndex > 6){
-        //         index = currentIndex + j - 8;
-        //         if (gridElementsArray[index].dataset.bomb === 'true'){
-        //             bombCounter++;
-        //         }
-        //         j++;
-        //     } else if (j < 5){
-        //         index = currentIndex + j - 2;
-        //         if (gridElementsArray[index].dataset.bomb === 'true'){
-        //             bombCounter++;
-        //         }
-        //         j += 2;
-        //     } else if ( j < 8) {
-        //         index = currentIndex + j;
-        //         if (gridElementsArray[index].dataset.bomb === 'true'){
-        //             bombCounter++;
-        //         }
-        //         j ++;
-        //     }
-        // }
-        // event.target.innerHTML = bombCounter;
+        //Controllo quante bombe ci sono nelle 8 celle che circondano quella selezionata
+        let currentIndex = parseInt(event.target.dataset.index);
+        let j = 0;
+        let bombCounter = 0;
+        let index = 0;
+        for (let i = 0; i < 8; i++ ){
+            if ( j < 3 && currentIndex > 6){
+                index = currentIndex + j - 8;
+                console.log(gridElementsArray[index]);
+                if (gridElementsArray[index] !== undefined && gridElementsArray[index].dataset.bomb === 'true'){
+                    bombCounter++;
+                }
+                j++;
+            } else if (j < 4){
+                index = currentIndex - 1;
+                console.log(gridElementsArray[index]);
+                if (gridElementsArray[index] !== undefined && gridElementsArray[index].dataset.bomb === 'true'){
+                    bombCounter++;
+                }
+                j ++;
+            } else if (j < 5){
+                index = currentIndex + 1;
+                console.log(gridElementsArray[index]);
+                if (gridElementsArray[index] !== undefined && gridElementsArray[index].dataset.bomb === 'true'){
+                    bombCounter++;
+                }
+                j ++; 
+            } else if ( j < 8) {
+                index = currentIndex + j + 1;
+                console.log(gridElementsArray[index]);
+                if (gridElementsArray[index] !== undefined && gridElementsArray[index].dataset.bomb === 'true'){
+                    bombCounter++;
+                }
+                j ++;
+            }
+        }
+        event.target.innerHTML = bombCounter;
         // MI ARRENDO, così è troppo complesso
 
         // Controllo se sono stati scoperti tutti le safe cell

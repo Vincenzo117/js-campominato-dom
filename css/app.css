@@ -85,6 +85,20 @@ main {
     background-position: center;
 }
 
+
+#end-game {
+    display: flex;
+    padding: 30px;
+    position: absolute;
+    top: 50%;
+    left: 2vw;
+    transform: translateY(-50%);
+    background-color: white;
+    border-radius: 10px;
+    height: 30vh;
+    width: 20vw;
+    display: none;
+}
 /* FOOTER */
 
 .footer-container {
