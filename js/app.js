@@ -31,23 +31,14 @@ function buildGrid(length, randArray) {
         cellElement.style.width = `calc(100% / ${length})`
         document.getElementById('grid').append(cellElement);
 
-        cellElement.addEventListener('click',
-
-            function () {
-                // I numeri da 1 a 16 dell'Array in cui sono distribuiti
-                // ogni volta in modo casuale saranno le bombe
-                if (randArray[i] <= 16) {
-                    this.classList.add('bomb');
-                    endGame();
-                } else {
-                    this.classList.add('safe');
-                }
-            }
-
-        )
+        // Assegno a ogni cella il numero contenuto nel random array con
+        // l'indice corrispondente
+        cellElement.dataset.number = randArray[i];
     }
     // Animazione di entrata
     gridElement.classList.add('FadeInScale');
+    // Aggiungo listener alla grid
+    gridElement.addEventListener('click', playGame);
 }
 
 
@@ -80,6 +71,25 @@ function startGame() {
     console.log(randArray);
     // Costruisco la gird
     buildGrid(dimension, randArray);
+}
+
+function playGame(event) {
+    // I numeri dell'Array vengono distribuiti ogni volta in modo
+    // casuale. I numeri da 1 a 16 costituiscono le bombe. A ogni
+    // cella ho assegnato il valore (come dataset) contenuto nel 
+    // randArray con lo stesso indice della cella
+    if (event.target.dataset.number <= 16) {
+        event.target.classList.add('bomb');
+        endGame();
+    } else {
+        event.target.classList.add('safe');
+    }
+
+}
+
+function endGame() {
+    // Tolgo il listener
+    document.getElementById('grid').removeEventListener('click',playGame);
 }
 
 document.getElementById('play-btn').addEventListener('click', startGame);
