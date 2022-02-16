@@ -31,9 +31,16 @@ function buildGrid(length, randArray) {
         cellElement.style.width = `calc(100% / ${length})`
         document.getElementById('grid').append(cellElement);
 
-        // Assegno a ogni cella il numero contenuto nel random array con
-        // l'indice corrispondente
-        cellElement.dataset.number = randArray[i];
+        // Assegno a ogni cella il numero dell'indice con un dataset
+        cellElement.dataset.index = i;
+
+        // Per generare le bombe utilizzo i numeri da 1 a 16
+        // contenuti nell'array e distribuiti casualmente ogni volta.
+        // Quindi alle celle che hanno lo stesso indice dei numeri 
+        // da uno a 16 dell'array assegno il dataset.bomb = 'true'
+        if (randArray[i] <= 16){
+            cellElement.dataset.bomb = 'true';
+        }
     }
     // Animazione di entrata
     gridElement.classList.add('FadeInScale');
@@ -74,11 +81,8 @@ function startGame() {
 }
 
 function playGame(event) {
-    // I numeri dell'Array vengono distribuiti ogni volta in modo
-    // casuale. I numeri da 1 a 16 costituiscono le bombe. A ogni
-    // cella ho assegnato il valore (come dataset) contenuto nel 
-    // randArray con lo stesso indice della cella
-    if (event.target.dataset.number <= 16) {
+    // Se la cella contiene una bomba allora avrà il dataset.bomb = 'true'
+    if (event.target.dataset.bomb === 'true') {
         event.target.classList.add('bomb');
         endGame();
     } else {
@@ -90,6 +94,14 @@ function playGame(event) {
 function endGame() {
     // Tolgo il listener
     document.getElementById('grid').removeEventListener('click',playGame);
+    const gridElementsArray = document.getElementsByClassName('grid__cell');
+    console.log(gridElementsArray);
+    // Scopro le altre bombe
+    for (let i = 0; i < gridElementsArray.length; i++){
+        if (gridElementsArray[i].dataset.bomb === 'true'){
+            gridElementsArray[i].classList.add('bomb');
+        }
+    }
 }
 
 document.getElementById('play-btn').addEventListener('click', startGame);
