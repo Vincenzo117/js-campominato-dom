@@ -23,6 +23,9 @@ function buildGrid(length, randArray) {
     const gridElement = document.getElementById('grid');
     // Svuoto la grid prima di iniziare
     gridElement.innerHTML = '';
+    score = 0;
+    document.getElementById('end-game').classList.remove('active');
+    document.querySelector('main').style.backgroundColor = 'aquamarine';
     // Creo le celle con un loop
     for (let i = 0; i < length ** 2; i++) {
         // Creo elemnto html
@@ -47,9 +50,11 @@ function buildGrid(length, randArray) {
     gridElement.classList.add('FadeInScale');
     // Aggiungo listener alla grid
     gridElement.addEventListener('click', playGame);
+    gridElement.addEventListener('contextmenu',placeFlag);
 }
 
 let dimension;
+let score;
 
 // Funzione per iniziare la partita
 function startGame() {
@@ -88,6 +93,7 @@ function playGame(event) {
         endGame();
     } else {
         event.target.classList.add('safe');
+        score++;
         const gridElementsArray = document.getElementsByClassName('grid__cell');
 
         //Controllo quante bombe ci sono nelle 8 celle che circondano quella selezionata
@@ -151,9 +157,21 @@ function endGame(win) {
             gridElementsArray[i].classList.add('bomb');
         }
     }
+    const gameResultWrapperElement = document.getElementById('end-game');
+    const gameResultElement = document.getElementById('end-game__result')
+    const gameScoreElement = document.getElementById('end-game__score');
+    gameResultWrapperElement.classList.add('active');
+    gameResultElement.innerHTML = 'Game Over';
+    gameScoreElement.innerHTML = score;
+    document.querySelector('main').style.backgroundColor = '#FF5735';
     if (win){
-        alert('Hai vinto!!!');
+        document.querySelector('main').style.backgroundColor = 'lime';
+        gameResultElement.innerHTML = 'You won!!';
     }
+}
+
+const placeFlag = (event) => {
+    event.target.classList.add('flag');
 }
 
 document.getElementById('play-btn').addEventListener('click', startGame);

@@ -43,6 +43,7 @@ main {
     justify-content: center;
     align-items: center;
     padding: 30px;
+    transition: all 300ms ease-in-out;
 }
 
 #grid {
@@ -67,7 +68,6 @@ main {
     background-color: #C0C0C0;
     box-shadow: inset 3px 3px white, inset -3px -3px #808080;
     border: 1px solid gray;
-  
 }
 
 .grid__cell.safe {
@@ -85,20 +85,41 @@ main {
     background-position: center;
 }
 
+.grid__cell.flag {
+    background-image: url("../img/flag.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
 
 #end-game {
     display: flex;
     padding: 30px;
     position: absolute;
     top: 50%;
-    left: 2vw;
-    transform: translateY(-50%);
+    left: 50%;
+    transform: translate(-50% , -50%);
     background-color: white;
     border-radius: 10px;
     height: 30vh;
     width: 20vw;
-    display: none;
+   opacity: 0.7;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   transition: all 700ms ease-in-out;
+   display: none;
 }
+
+#end-game.active {
+    display: flex;
+}
+
+.end-game__score-wrapper {
+    display: flex;
+    margin-top: 3vh;
+}
+
 /* FOOTER */
 
 .footer-container {
