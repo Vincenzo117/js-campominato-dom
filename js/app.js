@@ -87,6 +87,7 @@ function startGame() {
 }
 
 function playGame(event) {
+    event.target.classList.remove('flag');
     // Se la cella contiene una bomba allora avrà il dataset.bomb = 'true'
     if (event.target.dataset.bomb === 'true') {
         event.target.classList.add('bomb');
@@ -154,6 +155,7 @@ function endGame(win) {
     // Scopro le altre bombe
     for (let i = 0; i < gridElementsArray.length; i++){
         if (gridElementsArray[i].dataset.bomb === 'true'){
+            gridElementsArray[i].classList.remove('flag');
             gridElementsArray[i].classList.add('bomb');
         }
     }
@@ -172,6 +174,7 @@ function endGame(win) {
 
 const placeFlag = (event) => {
     event.target.classList.add('flag');
+    event.preventDefault();
 }
 
 document.getElementById('play-btn').addEventListener('click', startGame);
